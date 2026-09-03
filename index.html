@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .imagen {
+    transition: all 0.5s;
+  }
+  .imagen:hover {
+    filter: sepia(0.8) brightness(1.2);
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+</style>
+</head>
+<body>
+  <img src="foto.jpg" class="imagen" 
+       loading="lazy"
+       alt="Descripción"
+       width="400" height="300">
+  
+  <canvas id="canvas"></canvas>
+  
+  <script>
+    // Manipulación con Canvas
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      
+      // Efecto sepia
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      // ... manipulación de píxeles
+    };
+    img.src = 'foto.jpg';
+  </script>
+</body>
+</html>
